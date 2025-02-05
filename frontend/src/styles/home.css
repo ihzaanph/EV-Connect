@@ -1,0 +1,119 @@
+/* General Styles */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: url("../image/evbackground2.webp") no-repeat center center/cover;
+  position: relative; /* Ensures absolute positioning of logo */
+}
+
+/* Logo Styling */
+.logo {
+  position: absolute;
+  top: 20px; /* Adjust the distance from the top */
+  left: 20px; /* Adjust the distance from the left */
+  width: 110px; /* Adjust logo size */
+  height: auto;
+}
+
+/* Form Box */
+.form-box {
+  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 350px;
+}
+
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Input Fields */
+input,
+select {
+  width: 90%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  background-color: #f9f9f9;
+  color: #646566;
+}
+
+/* Role Dropdown Alignment */
+.select-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.select-container label {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.select-container select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+  background-color: #f9f9f9;
+  cursor: pointer;
+}
+
+
+/* Button */
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #ff8c00, #ff2e63);
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background: linear-gradient(135deg, #e67e22, #d63031);
+  transform: scale(1.05);
+}
+/* Toggle Signup/Login Text */
+p {
+  color: #007bff;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+p:hover {
+  text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 400px) {
+  .form-box {
+    width: 90%;
+  }
+
+  .logo {
+    width: 100px; /* Reduce logo size for small screens */
+    top: 10px;
+    left: 10px;
+  }
+}

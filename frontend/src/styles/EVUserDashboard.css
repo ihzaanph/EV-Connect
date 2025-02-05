@@ -1,0 +1,11 @@
+.ev-dashboard {
+    text-align: center;
+    padding: 50px;
+    background-color: #f0f8ff;
+    height: 100vh;
+  }
+  
+  .ev-dashboard h1 {
+    color: #007bff;
+  }
+  
