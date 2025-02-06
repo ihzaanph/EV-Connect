@@ -6,8 +6,12 @@ const chargingStationSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  location: {
-    type: String,
+  latitude: {
+    type: Number,
+    required: true,
+  },
+  longitude: {
+    type: Number,
     required: true,
   },
   slots: {
@@ -23,10 +27,7 @@ const chargingStationSchema = new mongoose.Schema({
     enum: ['active', 'inactive'], // 'active' or 'inactive'
     default: 'active',
   },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+
 });
 
 const ChargingStation = mongoose.model('ChargingStation', chargingStationSchema);

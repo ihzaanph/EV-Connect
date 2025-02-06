@@ -73,46 +73,6 @@ app.post("/users/login", async (req, res) => {
 });
 
 
-// Booking routes
-// POST Create Booking
-app.post("/bookings", async (req, res) => {
-    const { userId, chargingStationId, slot } = req.body;
-
-    const newBooking = new Booking({
-        user: userId,
-        chargingStation: chargingStationId,
-        slot,
-        status: "Pending" // Default status is "Pending"
-    });
-
-    try {
-        const savedBooking = await newBooking.save();
-        res.status(201).json(savedBooking);
-    } catch (err) {
-        res.status(500).json({ message: "Error creating booking" });
-    }
-});
-
-// GET All Bookings (for a specific user)
-app.get("/bookings/:userId", async (req, res) => {
-    try {
-        const bookings = await Booking.find({ user: req.params.userId }).populate("chargingStation");
-        res.status(200).json(bookings);
-    } catch (err) {
-        res.status(500).json({ message: "Error fetching bookings" });
-    }
-});
-
-// Update Booking Status (Confirm, Cancel, etc.)
-app.put("/bookings/:bookingId", async (req, res) => {
-    try {
-        const booking = await Booking.findByIdAndUpdate(req.params.bookingId, req.body, { new: true });
-        res.status(200).json(booking);
-    } catch (err) {
-        res.status(500).json({ message: "Error updating booking" });
-    }
-});
-
 // Listen on the specified port
 const PORT = 5006;
 app.listen(PORT, () => {

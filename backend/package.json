@@ -13,6 +13,8 @@
     "cors": "^2.8.5",
     "create-react-app": "^5.0.1",
     "express": "^4.21.2",
-    "mongoose": "^8.9.5"
+    "leaflet": "^1.9.4",
+    "mongoose": "^8.9.5",
+    "react-leaflet": "^5.0.0"
   }
 }

@@ -1,11 +1,139 @@
-.station-dashboard {
-    text-align: center;
-    padding: 50px;
-    background-color: #e6ffe6;
-    height: 100vh;
+/* General Styling */
+.dashboard-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+}
+
+/* Logo Styling */
+.logo {
+  position: absolute;
+  top: 15px; /* Adjusted distance from the top */
+  left: 20px; /* Adjusted distance from the left */
+  width: 90px; /* Adjusted logo size */
+  height: auto;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 250px;
+  background-color: #007bff;
+  color: white;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  position: fixed; /* Sidebar remains fixed */
+  left: 0;
+  top: 0;
+  overflow-y: auto; /* Enables scrolling if the content is too long */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 60px; /* Space below logo */
+}
+
+.sidebar ul li {
+  margin: 15px 0;
+}
+
+.sidebar ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  display: block;
+  padding: 12px;
+  border-radius: 5px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.sidebar ul li a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+/* Main Content */
+.main-content {
+  flex-grow: 1;
+  padding: 20px;
+  margin-left: 250px; /* Push content to the right of sidebar */
+}
+
+/* Header */
+header {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+header h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+header p {
+  margin: 5px 0 0;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Dashboard Cards */
+.dashboard-cards {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 200px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: #007bff;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 4px 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
   }
-  
-  .station-dashboard h1 {
-    color: #28a745;
+
+  .main-content {
+    margin-left: 200px;
   }
-  
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding-bottom: 20px;
+  }
+
+  .main-content {
+    margin-left: 0;
+    padding-top: 20px;
+  }
+
+  .dashboard-cards {
+    justify-content: center;
+  }
+}

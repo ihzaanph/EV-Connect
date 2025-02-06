@@ -1,11 +1,104 @@
-.ev-dashboard {
-    text-align: center;
-    padding: 50px;
-    background-color: #f0f8ff;
-    height: 100vh;
+/* General Styling */
+.dashboard-container {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 100px; /* Space for the fixed header */
+}
+
+/* Header Section (Fixed at the Top) */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #007bff;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  text-align: center;
+  z-index: 1000;
+}
+
+.header h1 {
+  font-size: 26px;
+  color: #ffffff;
+  margin: 0;
+  font-weight: bold;
+}
+
+/* User Info Box */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 50%;
+  max-width: 400px;
+  margin-top: 20px;
+  height: 20px;
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+h3 {
+  margin: 0;
+  color: #f3f6f4;
+  font-size: 18px;
+}
+
+/* Search Button */
+.search-btn {
+  margin-top: 50px;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  width: 50%;
+  gap: 10px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
+}
+
+.search-btn:hover {
+  background: linear-gradient(135deg, #0056b3, #003f7f);
+  box-shadow: 0 5px 15px rgba(0, 91, 187, 0.4);
+  transform: scale(1.05);
+}
+
+/* Search Icon */
+.icon {
+  font-size: 22px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .dashboard-container {
+    padding-top: 80px;
   }
-  
-  .ev-dashboard h1 {
-    color: #007bff;
+
+  .user-info {
+    width: 90%;
   }
-  
+
+  .search-btn {
+    width: 90%;
+    justify-content: center;
+  }
+}
