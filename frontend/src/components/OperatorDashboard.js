@@ -22,7 +22,7 @@ const StationOperatorDashboard = ({ username }) => {
       {/* Main Content */}
       <div className="main-content">
         <header>
-          <h2>Station Operator Dashboard</h2>
+          <h2>STATION OPERATOR DASHBOARD</h2>
           <p>Welcome {username}</p>
         </header>
         

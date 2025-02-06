@@ -4,7 +4,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: url("../image/evbackground2.webp") no-repeat center center/cover;
+  background: url("../image/evbackground3.webp") no-repeat center center/cover;
   position: relative; /* Ensures absolute positioning of logo */
 }
 
@@ -81,7 +81,7 @@ button {
   padding: 14px;
   border: none;
   border-radius: 8px;
-  background: linear-gradient(135deg, #ff8c00, #ff2e63);
+  background: linear-gradient(135deg, #0276e1, #007bff);
   color: white;
   font-size: 18px;
   font-weight: bold;
@@ -90,7 +90,7 @@ button {
 }
 
 button:hover {
-  background: linear-gradient(135deg, #e67e22, #d63031);
+  background: linear-gradient(135deg, #0276e1, #007bff);
   transform: scale(1.05);
 }
 /* Toggle Signup/Login Text */

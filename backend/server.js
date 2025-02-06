@@ -73,6 +73,73 @@ app.post("/users/login", async (req, res) => {
 });
 
 
+// 🚀 GET - Fetch all charging stations
+app.get("/api/stations", async (req, res) => {
+    try {
+      const stations = await ChargingStation.find();
+      res.json(stations);
+    } catch (err) {
+      res.status(500).json({ message: "Error fetching stations" });
+    }
+  });
+  
+  // 🚀 GET - Fetch single station by ID
+  app.get("/api/stations/:id", async (req, res) => {
+    try {
+      const station = await ChargingStation.findById(req.params.id);
+      if (!station) return res.status(404).json({ message: "Station not found" });
+      res.json(station);
+    } catch (err) {
+      res.status(500).json({ message: "Error fetching station" });
+    }
+  });
+  
+  // 🚀 POST - Add a new charging station
+  app.post("/api/stations", async (req, res) => {
+    const { name, latitude, longitude, slots } = req.body;
+  
+    try {
+      const newStation = new ChargingStation({
+        name,
+        latitude,
+        longitude,
+        slots,
+        availableSlots: slots, // Initially, all slots are available
+      });
+  
+      const savedStation = await newStation.save();
+      res.status(201).json(savedStation);
+    } catch (err) {
+      res.status(500).json({ message: "Error adding station" });
+    }
+  });
+  
+  // 🚀 PUT - Update a charging station
+  app.post("/api/stations/:id", async (req, res) => {
+    try {
+      const updatedStation = await ChargingStation.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }
+      );
+      res.json(updatedStation);
+    } catch (err) {
+      res.status(500).json({ message: "Error updating station" });
+    }
+  });
+  
+  // 🚀 DELETE - Remove a charging station
+  app.delete("/api/stations/:id", async (req, res) => {
+    try {
+      await ChargingStation.findByIdAndDelete(req.params.id);
+      res.json({ message: "Station deleted successfully" });
+    } catch (err) {
+      res.status(500).json({ message: "Error deleting station" });
+    }
+  });
+  
+
+
 // Listen on the specified port
 const PORT = 5006;
 app.listen(PORT, () => {

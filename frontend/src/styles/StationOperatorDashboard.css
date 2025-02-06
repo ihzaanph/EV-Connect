@@ -3,7 +3,7 @@
   display: flex;
   height: 100vh;
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4;
+  background: url("../image/evbackground8.webp") no-repeat center center/cover;
 }
 
 /* Logo Styling */

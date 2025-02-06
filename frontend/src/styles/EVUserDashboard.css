@@ -2,7 +2,7 @@
 .dashboard-container {
   text-align: center;
   font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
+  background: url("../image/evbackground6.webp");
   min-height: 100vh;
   display: flex;
   flex-direction: column;
