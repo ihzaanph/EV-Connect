@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import "../styles/home.css";
+import { useUser } from "../context/UserContext";
 
 const Login = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -12,6 +13,8 @@ const Login = () => {
     password: "",
     role: "evuser", // Default role
   });
+
+  const {user,setUser}=useUser();
 
   const navigate = useNavigate();
 
@@ -35,6 +38,8 @@ const Login = () => {
         const userData = response.data.user; // Corrected response handling
         localStorage.setItem("userRole", userData.role);
 
+        setUser({id:response.data.user.id,name:response.data.user.name , email: response.data.user.email, role:response.data.user.role})
+
         // Navigate based on user role
         if (userData.role === "evuser") {
           navigate("/ev-dashboard");
@@ -53,6 +58,11 @@ const Login = () => {
 
   return (
     <div className="container">
+      {/* Background Video */}
+      <video autoPlay loop muted playsInline className="background-video">
+        <source src="/video/evbackground1.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
     {/* Logo */}
     <img src="../image/logo.png" alt="Logo" className="logo" />
       

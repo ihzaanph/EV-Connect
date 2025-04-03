@@ -1,0 +1,100 @@
+/* View Stations Container */
+.view-stations-container {
+  text-align: center;
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #007bff 30%, #4CAF50 100%);
+  color: white;
+  font-family: "Arial", sans-serif;
+}
+
+.hedd{
+  color: rgb(238, 231, 231);
+}
+
+/* Header Styling */
+.view-stations-container h2 {
+  margin-bottom: 20px;
+  font-size: 26px;
+  font-weight: bold;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Map Box Container */
+.map-box {
+  width: 80%;
+  height: 550px;
+  margin: 0 auto;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.3);
+  margin-top: 70px;
+}
+
+/* Google Map Styling */
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* Info Window Styling */
+.info-window {
+  text-align: center;
+  font-size: 14px;
+  color: black;
+}
+
+.info-window h4 {
+  margin-bottom: 5px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+.info-window p {
+  margin: 5px 0;
+}
+
+/* "Get Directions" Button */
+.direction-btn {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.direction-btn:hover {
+  background: #388E3C;
+}
+
+/* Active & Inactive Status Colors */
+.active {
+  color: green;
+  font-weight: bold;
+}
+
+.inactive {
+  color: red;
+  font-weight: bold;
+}
+
+.book-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #28a745;
+    color: white;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.book-btn:hover {
+  background-color: #388E3C;
+}

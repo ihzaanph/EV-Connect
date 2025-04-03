@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import "../styles/UpdateStation.css";
+
+// Google Maps API Key
+const GOOGLE_MAPS_API_KEY = "AIzaSyAS9zfp0wdczlh-d1WDk1VHAbsTrhsDg-E";
 
 const UpdateStation = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Get station ID from URL
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: "",
@@ -12,132 +17,110 @@ const UpdateStation = () => {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5006/api/stations/${id}`)
-      .then((res) => res.json())
-      .then((data) => setFormData(data));
-  }, [id]);
+    fetchStationDetails();
+  }, []);
 
+  // 📌 Fetch the current station details
+  const fetchStationDetails = async () => {
+    try {
+      const response = await fetch(`http://localhost:5006/api/stations}`);
+      const data = await response.json();
+      setFormData({
+        name: data.name,
+        latitude: data.latitude,
+        longitude: data.longitude,
+        slots: data.slots,
+      });
+    } catch (error) {
+      console.error("Error fetching station details:", error);
+    }
+  };
+
+  // 📌 Handle form input change
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleUpdate = async (e) => {
-    e.preventDefault();
-    await fetch(`http://localhost:5006/api/stations/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(formData),
-    });
-    navigate("/operator/manage-stations");
+  // 📌 Use Current Location for Latitude & Longitude
+  const useCurrentLocation = () => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const lat = position.coords.latitude;
+          const lng = position.coords.longitude;
+          setFormData({ ...formData, latitude: lat, longitude: lng });
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+        }
+      );
+    } else {
+      alert("Geolocation is not supported by this browser.");
+    }
   };
 
-  // Internal CSS styles
-  const styles = {
-    container: {
-      backgroundImage: "url('../image/evbackground8.webp')",
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-      minHeight: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      padding: "20px",
-    },
-    contentContainer: {
-      background: "rgba(255, 255, 255, 0.85)", // Semi-transparent white
-      padding: "30px",
-      borderRadius: "10px",
-      width: "80%",
-      maxWidth: "500px",
-      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.2)",
-      textAlign: "center",
-    },
-    heading: {
-      fontSize: "24px",
-      fontWeight: "bold",
-      marginBottom: "20px",
-      color: "black",
-    },
-    form: {
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      gap: "15px",
-    },
-    input: {
-      width: "100%",
-      padding: "10px",
-      fontSize: "16px",
-      border: "1px solid #ccc",
-      borderRadius: "5px",
-    },
-    updateButton: {
-      backgroundColor: "#28a745",
-      color: "white",
-      padding: "10px",
-      fontSize: "16px",
-      border: "none",
-      cursor: "pointer",
-      borderRadius: "5px",
-      width: "100%",
-      transition: "background 0.3s",
-    },
-    updateButtonHover: {
-      backgroundColor: "#218838",
-    },
+  // 📌 Handle map click to update latitude & longitude
+  const handleMapClick = (event) => {
+    const lat = event.latLng.lat();
+    const lng = event.latLng.lng();
+    setFormData({ ...formData, latitude: lat, longitude: lng });
+  };
+
+  // 📌 Handle station update
+  const handleUpdate = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`http://localhost:5006/api/stations/update/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        alert("Station updated successfully!");
+        navigate("/manage-stations"); // Redirect back to Manage Stations
+      } else {
+        alert("Failed to update station.");
+      }
+    } catch (error) {
+      console.error("Error updating station:", error);
+    }
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.contentContainer}>
-        <h2 style={styles.heading}>UPDATE CHARGING STATION</h2>
-        <form onSubmit={handleUpdate} style={styles.form}>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            style={styles.input}
-            placeholder="Station Name"
-          />
-          <input
-            type="number"
-            name="latitude"
-            value={formData.latitude}
-            onChange={handleChange}
-            required
-            style={styles.input}
-            placeholder="Latitude"
-          />
-          <input
-            type="number"
-            name="longitude"
-            value={formData.longitude}
-            onChange={handleChange}
-            required
-            style={styles.input}
-            placeholder="Longitude"
-          />
-          <input
-            type="number"
-            name="slots"
-            value={formData.slots}
-            onChange={handleChange}
-            required
-            style={styles.input}
-            placeholder="Total Slots"
-          />
-          <button
-            type="submit"
-            style={styles.updateButton}
-            onMouseOver={(e) => (e.target.style.backgroundColor = styles.updateButtonHover.backgroundColor)}
-            onMouseOut={(e) => (e.target.style.backgroundColor = styles.updateButton.backgroundColor)}
+  <div className="mainn">
+    <div className="update-container">
+      <h2>Update Charging Station</h2>
+      <form onSubmit={handleUpdate} className="update-form">
+        <input type="text" name="name" placeholder="Station Name" value={formData.name} onChange={handleChange} required />
+        <input type="number" name="slots" placeholder="Total Slots" value={formData.slots} onChange={handleChange} required />
+
+        {/* Use Current Location Button */}
+        <button type="button" onClick={useCurrentLocation} className="location-btn">
+          📍 Use Current Location
+        </button>
+
+        {/* Google Map for Selecting Location */}
+        <LoadScript googleMapsApiKey={GOOGLE_MAPS_API_KEY} libraries={["places"]}>
+
+          <GoogleMap
+            mapContainerClassName="map-container"
+            center={formData.latitude && formData.longitude ? { lat: parseFloat(formData.latitude), lng: parseFloat(formData.longitude) } : { lat: 10.0, lng: 76.0 }}
+            zoom={10}
+            onClick={handleMapClick}
           >
-            Update Station
-          </button>
-        </form>
-      </div>
+            {formData.latitude && formData.longitude && (
+              <Marker position={{ lat: parseFloat(formData.latitude), lng: parseFloat(formData.longitude) }} />
+            )}
+          </GoogleMap>
+        </LoadScript>
+
+        <p>Selected Location: {formData.latitude}, {formData.longitude}</p>
+
+        <button type="submit" className="update-btn">Update Station</button>
+      </form>
+    </div>
     </div>
   );
 };

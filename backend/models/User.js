@@ -9,6 +9,10 @@ const userSchema = new mongoose.Schema({
         type: String, 
         enum: ["evuser", "admin", "stationoperator"], 
         default: "evuser" 
+    },
+    profilePicture: { 
+        type: String,  // Store image URL
+        default: "https://via.placeholder.com/150" // Default placeholder image
     }
 });
 

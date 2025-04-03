@@ -1,0 +1,55 @@
+.operator-booking-container {
+  padding: 20px;
+  text-align: center;
+  background: linear-gradient(135deg, #4CAF50  50%, #007bff 100%);
+}
+
+.station-section {
+  margin-bottom: 30px;
+}
+
+h3 {
+  background: #007bff;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+h4 {
+    margin-top: 30px;
+    background: #040505;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+.booking-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.booking-table th, .booking-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+}
+
+.booking-table th {
+  background: #4CAF50;
+  color: white;
+}
+
+.book {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 10%;
+  }
+  
+  .book:hover {
+    background-color: #0056b3;
+  }

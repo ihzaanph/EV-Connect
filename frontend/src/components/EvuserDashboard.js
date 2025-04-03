@@ -1,38 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { FaSearchLocation } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // Import navigation
-import "../styles/EVUserDashboard.css"; // CSS for styling
+import React, { useState } from "react";
+import { FaSearchLocation, FaBars } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import "../styles/EVUserDashboard.css";
+import { useUser } from "../context/UserContext";
 
 const EVUserDashboard = () => {
-  const [userName, setUserName] = useState("");
-  const navigate = useNavigate(); // React Router Navigation
+  const { user } = useUser();
+  const navigate = useNavigate();
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Fetch user name from local storage or API
-  useEffect(() => {
-    const storedUser = localStorage.getItem("userName") || "Guest";
-    setUserName(storedUser);
-  }, []);
-
-  // Function to navigate to the StationMap page
-  const handleSearchClick = () => {
-    navigate("/stationmap");
+  // Navigation Functions
+  const handleSearchClick = () => navigate("/stationmap");
+  const handleViewBooking = () => navigate("/viewbookingevuser");
+  const handleProfile = () => navigate("/profile");
+  const handleViewStations = () => navigate("/viewstations");
+  const handleFeedback = () => navigate("/feedback");
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    navigate("/login");
   };
 
   return (
     <div className="dashboard-container">
-      
-      {/* Header Section */}
-      <div className="header">
-        {/* Logo */}
-        <img src="../image/logo.png" alt="Logo" className="logo" />
-        <h1>EV User</h1>
-        <h3>Welcome, {userName}!</h3>
-      </div>
+      {/* Header with Dropdown */}
+      <header className="dashboard-header">
+        <h1>EV User Dashboard</h1>
+        <div className="dropdown">
+          <button className="dropdown-btn" onClick={() => setDropdownOpen(!dropdownOpen)}>
+            <FaBars />
+          </button>
+          {dropdownOpen && (
+            <div className="dropdown-content">
+              {/*<button onClick={handleProfile}>Profile</button>*/}
+              <button onClick={handleViewStations}>View Stations</button>
+              <button onClick={handleFeedback}>Feedback</button>
+              <button onClick={handleLogout} className="logout-btn">Logout</button>
+            </div>
+          )}
+        </div>
+      </header>
+      <h1 className="welcome">Welcome {user.name}</h1>
+        <div>
+          
+        </div>
 
-      {/* Search Button */}
-      <button className="search-btn" onClick={handleSearchClick}>
-        <FaSearchLocation className="icon" /> Search Station Nearby
-      </button>
+      {/* Centered Buttons */}
+      <div className="center-content">
+        <button className="action-btn" onClick={handleSearchClick}>
+          <FaSearchLocation className="icon" />
+          Search Nearby Stations
+        </button>
+        <button className="action-btn" onClick={handleViewBooking}>
+          View Booking
+        </button>
+      </div>
     </div>
   );
 };

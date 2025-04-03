@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-// Charging Station Schema
+// current
+// // Charging Station Schema
 const chargingStationSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -27,6 +28,7 @@ const chargingStationSchema = new mongoose.Schema({
     enum: ['active', 'inactive'], // 'active' or 'inactive'
     default: 'active',
   },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true } ,
 
 });
 
